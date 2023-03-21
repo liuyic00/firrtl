@@ -68,7 +68,8 @@ lazy val protobufSettings = Seq(
   // The parentheses around the version help avoid version ambiguity in release scripts
   ProtobufConfig / version := ("3.18.3"), // CVE-2021-22569
   ProtobufConfig / sourceDirectory := baseDirectory.value / "src" / "main" / "proto",
-  ProtobufConfig / protobufRunProtoc := (args => com.github.os72.protocjar.Protoc.runProtoc("-v351" +: args.toArray))
+  ProtobufConfig / protobufRunProtoc := (args => com.github.os72.protocjar.Protoc.runProtoc("-v351" +: args.toArray)),
+  ProtobufConfig / protobufProtoc := "/opt/homebrew/bin/protoc"
 )
 
 lazy val assemblySettings = Seq(
