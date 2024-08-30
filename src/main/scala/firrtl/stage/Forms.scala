@@ -95,7 +95,8 @@ object Forms {
     Seq(
       Dependency[firrtl.transforms.ConstantPropagation],
       Dependency(passes.CommonSubexpressionElimination),
-      Dependency[firrtl.transforms.DeadCodeElimination]
+      Dependency[firrtl.transforms.DeadCodeElimination],
+      Dependency[firrtl.transforms.AssertionBasedSlice]
     )
 
   private def VerilogLowerings(optimize: Boolean): Seq[TransformDependency] = {
