@@ -12,7 +12,7 @@ import firrtl.passes.PassException
 import firrtl.passes.memlib.VerilogMemDelays
 import firrtl.stage.Forms
 import firrtl.stage.TransformManager.TransformDependency
-import firrtl.transforms.{EnsureNamedStatements, PropagatePresetAnnotations}
+import firrtl.transforms.{AssertionBasedSlice, EnsureNamedStatements, PropagatePresetAnnotations}
 import logger.LazyLogging
 
 import scala.collection.mutable
@@ -28,7 +28,7 @@ object FirrtlToTransitionSystem extends Transform with DependencyAPIMigration {
       Dependency(VerilogMemDelays),
       Dependency(EnsureNamedStatements), // this is required to give assert/assume statements good names
       Dependency[PropagatePresetAnnotations]
-    )
+    ) ++ Seq(Dependency[AssertionBasedSlice])
   override def invalidates(a: Transform): Boolean = false
   // since this pass only runs on the main module, inlining needs to happen before
   override def optionalPrerequisites: Seq[TransformDependency] = Seq(Dependency[firrtl.passes.InlineInstances])
